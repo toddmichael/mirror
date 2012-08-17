@@ -1,5 +1,5 @@
 
-actions :enable, :disable
+actions :enable, :disable, :send_notification
 
 # chef 10.10+
 default_action :enable

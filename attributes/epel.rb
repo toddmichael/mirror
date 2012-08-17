@@ -1,8 +1,9 @@
 
-
-default[:mirror][:epel][:rsync_url] = "rsync://dl.fedoraproject.org/fedora-epel"
-default[:mirror][:centos][:bw_limit] = 5000
-default[:mirror][:centos][:exclude] =  %w{
+# default is to enable all of these
+default[:mirror][:epel][:enabled] = true
+default[:mirror][:epel][:url] = "rsync://dl.fedoraproject.org/fedora-epel"
+default[:mirror][:epel][:bw_limit] = 5000
+default[:mirror][:epel][:exclude] =  %w{
 */ppc64/
 /2/
 /2.*

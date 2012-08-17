@@ -1,0 +1,17 @@
+{
+  "name": "repo_master",
+  "description": "",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[apache2]",
+    "recipe[mirror::master]",
+    "recipe[kickstart]"
+  ],
+  "env_run_lists": {
+  }
+}

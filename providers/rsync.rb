@@ -1,4 +1,5 @@
-notifying_action :enable do
+
+action :enable do
   name  = new_resource.name
   url   = new_resource.url
   limit = new_resource.limit
@@ -17,6 +18,7 @@ notifying_action :enable do
       :repo_destination => "#{base_path}/stage/#{name}",
       :bandwidth_limit  => limit
     )
+    notifies :send_notification, new_resource, :immediately
   end
 
   template "#{base_path}/bin/exclude-#{name}" do
@@ -24,7 +26,8 @@ notifying_action :enable do
     owner new_resource.owner
     group new_resource.group
     mode 0664
-    variables( :excludes => exclude ) 
+    variables( :excludes => new_resource.exclude ) 
+    notifies :send_notification, new_resource, :immediately
   end
 
   template "#{base_path}/bin/promote-#{name}" do
@@ -37,10 +40,11 @@ notifying_action :enable do
       :source => "#{base_path}/stage/#{name}/",
       :dest   => "#{base_path}/prod/#{name}/"
     )
+    notifies :send_notification, new_resource, :immediately
   end
     
   cron_command =  "#{base_path}/bin/mirror-#{name}"
-  if current_resource.auto_promote == true
+  if new_resource.auto_promote == true
     cron_command << " && #{base_path}/bin/promote-#{name}"
   end
 
@@ -51,11 +55,17 @@ notifying_action :enable do
     month schedule[:month]
     weekday schedule[:weekday]
     command cron_command
+    notifies :send_notification, new_resource, :immediately
   end
 end
 
-notifying_action :disable do
+action :disable do
   cron "mirror-#{name}" do 
     action :delete
+    notifies :send_notification, new_resource, :immediately
   end
+end
+
+action :send_notification do
+  new_resource.updated_by_last_action(true)
 end

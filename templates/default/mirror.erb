@@ -1,0 +1,17 @@
+#!/bin/sh  -x
+#
+#
+EXCLUSION="<%= @exclude_file %>"
+RSYNC_HOST="<%= @mirror_location %>"
+DESTINATION="<%= @repo_destination %>"
+BWLIMIT="<%= @bandwidth_limit %>"
+
+if [ ! -d $DESTINATION ] ; then
+  mkdir -p $DESTINATION 
+fi
+
+<% if @bandwidth_limit.to_s.empty? -%>
+/usr/bin/env rsync  -Pauvz --delete --bwlimit=$BWLIMIT  --exclude-from=$EXCLUSION  $RSYNC_HOST $DESTINATION  
+<% else -%>
+/usr/bin/env rsync  -Pauvz --delete --exclude-from=$EXCLUSION --delete $RSYNC_HOST $DESTINATION 
+<% end %>
