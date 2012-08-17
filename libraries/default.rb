@@ -8,6 +8,10 @@ module Repo
         return if mirror.has_key? :authoritative and  mirror[:authoritative] == true
       end
 
+      if node.recipes.include?("mirror::slave") 
+        local_destination = "#{node[:mirror][:base_path]}/prod/#{name}"
+      end
+
       mirror_rsync name do
         base_path node[:mirror][:base_path]
         exclude   mirror[:exclude] if node[:mirror][name].has_key? :exclude
@@ -15,6 +19,8 @@ module Repo
         owner     node[:apache][:user]
         group     node[:apache][:group]
         url       mirror[:url]
+        destination  local_destination
+        schedule  mirror[:schedule] if  mirror.has_key? :schedule
       end
     end
 

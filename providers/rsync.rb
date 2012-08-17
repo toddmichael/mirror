@@ -5,7 +5,19 @@ action :enable do
   limit = new_resource.limit
   schedule  = new_resource.schedule
   base_path = new_resource.base_path
-  
+  destination = new_resource.destination
+
+  if destination.blank?
+    destination = "#{base_path}/stage/#{name}"
+  end
+
+  %w/bin prod stage/.each do |path|
+    directory "#{base_path}/#{path}" do
+      owner new_resource.owner
+      group new_resource.group
+    end
+  end
+
   # setup the centos mirror scripts
   template "#{base_path}/bin/#{name}-mirror" do
     source "mirror.erb"
@@ -15,7 +27,7 @@ action :enable do
     variables( 
       :exclude_file     => "#{base_path}/bin/exclude-#{name}",
       :mirror_location  => url,
-      :repo_destination => "#{base_path}/stage/#{name}",
+      :repo_destination => destination,
       :bandwidth_limit  => limit
     )
     notifies :send_notification, new_resource, :immediately
@@ -43,7 +55,7 @@ action :enable do
     notifies :send_notification, new_resource, :immediately
   end
     
-  cron_command =  "#{base_path}/bin/mirror-#{name}"
+  cron_command =  "#{base_path}/bin/#{name}-mirror"
   if new_resource.auto_promote == true
     cron_command << " && #{base_path}/bin/promote-#{name}"
   end
