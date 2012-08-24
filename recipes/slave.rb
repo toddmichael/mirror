@@ -1,9 +1,9 @@
 #
 # Author:: Jesse Nelson <spheromak@gmail.com>
 # Cookbook Name:: mirror
-# Recipe:: centos
+# Recipe:: slave
 # Description:: 
-#   Creates a centos mirror
+#   Slave node mirror in the repo system
 #
 # Copyright:: Copyright (c) 2011 Jesse Nelson
 #
@@ -19,15 +19,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe 'server'
+# slaves are servers too.
+include_recipe 'mirror::server'
 
-mirror_rsync "centos" do 
-  base_path node[:mirror][:base_path]
-  exclude   node[:mirror][:centos][:exclude]
-  limit     node[:mirror][:centos][:bw_limit]
-  owner     node[:apache][:user]
-  group     node[:apache][:group]
-  url       node[:mirror][:centos][:rsync_url]
+class Chef::Recipe
+  include Repo::Mirror
 end
 
-
+node[:mirror].each do |mirror, data|
+  next unless validate( mirror, data )
+  dispatch( mirror, data )
+end

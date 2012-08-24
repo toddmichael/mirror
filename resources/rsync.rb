@@ -1,5 +1,5 @@
 
-actions :enable, :disable
+actions :enable, :disable, :send_notification
 
 # chef 10.10+
 default_action :enable
@@ -19,4 +19,5 @@ attribute :limit, :kind_of => Fixnum, :default => 0
 attribute :group, :kind_of => String, :default => "nobody" 
 attribute :owner, :kind_of => String, :default => "nobody" 
 attribute :schedule, :kind_of => Hash, :default => cron_schedule
-attribute :auto_promote, :kind_of => [ TrueClass, FalseClass ], :default => true
+attribute :destination, :kind_of => String, :default => ""
+attribute :auto_promote, :kind_of => [ TrueClass, FalseClass ], :default => false
