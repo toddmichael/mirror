@@ -11,7 +11,7 @@ if [ ! -d $DESTINATION ] ; then
 fi
 
 <% if @bandwidth_limit.to_s.empty? -%>
-/usr/bin/env rsync  -Pauvz --delete --bwlimit=$BWLIMIT  --exclude-from=$EXCLUSION  $RSYNC_HOST $DESTINATION  
+/usr/bin/env rsync  -Pauvz --delete --bwlimit=$BWLIMIT --exclude-from=$EXCLUSION  $RSYNC_HOST $DESTINATION  
 <% else -%>
-/usr/bin/env rsync  -Pauvz --delete --exclude-from=$EXCLUSION --delete $RSYNC_HOST $DESTINATION 
+/usr/bin/env rsync  -Pauvz --delete --exclude-from=$EXCLUSION $RSYNC_HOST $DESTINATION 
 <% end %>
