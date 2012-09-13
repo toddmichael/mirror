@@ -1,2 +1,9 @@
 Gemfile.lock
 Berksfile.lock
+metadata.json
+.swap
+.swp
+tags
+.tags
+.berkshelf
+.berksfile
