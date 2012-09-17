@@ -1,6 +1,13 @@
-default[:mirror][:ubuntu_precise][:enabled] = true
-default[:mirror][:ubuntu_precise][:url] = "rsync://ftp.riken.jp/ubuntu/dists/precise/"
-default[:mirror][:ubuntu_precise][:bw_limit] = 10000
-default[:mirror][:ubuntu_precise][:exclude] = []
+default[:mirror][:ubuntu][:enabled] = true
+default[:mirror][:ubuntu][:url] = "rsync://ftp.riken.jp/ubuntu/dists/"
+default[:mirror][:ubuntu][:bw_limit] = 10000
+default[:mirror][:ubuntu][:exclude] = %w{ 
+ hardy*
+ lucid*
+ maveric*
+ natty*
+ oneiric*
+ precise-proposed
+}
 
 
