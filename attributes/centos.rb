@@ -26,4 +26,5 @@ default[:mirror][:centos][:exclude] =  %w{
   /5.7
   /6.0
   /6.1 
+  /6.2 
 } 
