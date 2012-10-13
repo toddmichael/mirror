@@ -1,5 +1,5 @@
 default[:mirror][:ubuntu][:enabled] = true
-default[:mirror][:ubuntu][:url] = "rsync://kr.archive.ubuntu.com/ubuntu/"
+default[:mirror][:ubuntu][:url] = "rsync://mirror.aarnet.edu.au/ubuntu/archive/"
 default[:mirror][:ubuntu][:bw_limit] = 10000
 default[:mirror][:ubuntu][:exclude] = %w{ 
  dists/hardy*

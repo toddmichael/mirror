@@ -1,6 +1,6 @@
 
 default[:mirror][:centos][:enabled] = true
-default[:mirror][:centos][:url] = "rsync://ftp.riken.jp/centos/"
+default[:mirror][:centos][:url] = "rsync://mirror.aarnet.edu.au/centos/"
 default[:mirror][:centos][:bw_limit] = 5000
 default[:mirror][:centos][:exclude] =  %w{ 
   /2/
