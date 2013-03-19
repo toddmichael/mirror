@@ -1,7 +1,7 @@
 #
 # Author:: Jesse Nelson <spheromak@gmail.com>
-# Cookbook Name:: yum
-# Recipe:: repo_server
+# Cookbook Name:: mirror
+# Recipe:: master
 # Description:: 
 #   Creates a repo mirror
 #
