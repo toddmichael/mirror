@@ -9,6 +9,7 @@ default[:mirror][:centos][:exclude] =  %w{
   /3.*
   /4/
   /4.*
+  /5.*
   apt/
   docs/
   isos/
@@ -21,9 +22,6 @@ default[:mirror][:centos][:exclude] =  %w{
   Deployment_Guide-*
   5server
   5Server
-  /5.5
-  /5.6
-  /5.7
   /6.0
   /6.1 
   /6.2 

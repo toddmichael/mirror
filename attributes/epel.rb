@@ -7,10 +7,9 @@ default[:mirror][:epel][:exclude] =  %w{
   beta/
   testing/
   beta testing 
+  5/*
   6/ppc64/ 
   6/SRPMS/
-  5/ppc
-  5/ppc64
   SRPMS
   4*
   */SRPMS/*
